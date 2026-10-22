@@ -741,9 +741,7 @@ function getMaxItems(arr, n) {
 
 // 27.2
 function getMaxItems2(arr, n) {
-    return [...arr]
-        .sort((a, b) => b - a)
-        .slice(0, n);}
+    return [...arr].sort((a, b) => b - a).slice(0, n);}
 // console.log(getMaxItems2([10, 2, 7, 5, 3, -5], 3));
 
 /** 28
@@ -859,27 +857,30 @@ function propagateItemsByPositionIndex2(arr) {
  *    shiftArray(['a', 'b', 'c', 'd'], -1) => ['b', 'c', 'd', 'a']
  *    shiftArray([10, 20, 30, 40, 50], -3) => [40, 50, 10, 20, 30]
  */
-function shiftArrayWithLoop(arr, n) {
-    if (arr.length <= 1 || n === 0) return [...arr];
-    let result = [...arr];
-    let effectiveShift = Math.abs(n) % arr.length;
-    if (n > 0) {
-        for (let i = 0; i < effectiveShift; i++) {
-            let element = result.pop();
-            result.unshift(element);}
-    } else {
-        for (let i = 0; i < effectiveShift; i++) {
-            let element = result.shift();
-            result.push(element);}}
-    return result;}
-// console.log(shiftArrayWithLoop([1, 2, 3, 4, 5], 2));
+function shiftArray(arr, n) {
+    if (arr.length === 0) return arr;
+  let result = [...arr]; 
+  let length = result.length;
+  let count = n % length;
+  if (count > 0) {
+    for (let i = 0; i < count; i++) {
+      let lastElement = result.pop();
+      result.unshift(lastElement);}
+  } else if (count < 0) {
+    count = Math.abs(count);
+    for (let i = 0; i < count; i++) {
+      const firstElement = result.shift();
+      result.push(firstElement);}}}
+// console.log(shiftArray([1, 2, 3, 4, 5], 2));
 
 // 31.2
 function shiftArray2(arr, n) {
-    if (arr.length <= 1 || n === 0) return [...arr];
-    let len = arr.length;
-    let splitIndex = ((-n % len) + len) % len;
-    return arr.slice(splitIndex).concat(arr.slice(0, splitIndex));}
+    if (arr.length === 0) return arr;
+  let length = arr.length;
+  let shiftIndex = (n % length + length) % length;
+  let rightPart = arr.slice(-shiftIndex);
+  let leftPart = arr.slice(0, length - shiftIndex);
+  return [...rightPart, ...leftPart];}
 // console.log(shiftArray2([1, 2, 3, 4, 5], 2)); 
 
 /** 32
