@@ -13,22 +13,22 @@
  *    getIntervalArray(0, 100) => [ 0, 1, 2, ..., 100 ]
  *    getIntervalArray(3, 3) => [ 3 ]
  */
-function getIntervalArray(start, end) {
+function getIntervalArray1(start, end) {
     let arr = [];
     for (let i = start; i <= end; i++) {
         arr.push(i); 
     }
     return arr;
 }
-// console.log(getIntervalArray(1, 5))
+// console.log(getIntervalArray1(1, 5))
 
 // 1.2
 function getIntervalArray2(start,end) {
     let length = end - start + 1;
     
-    return Array.from({ length }, (_, index) => start + index);
+    return Array.from({ length }, (_, i) => start + i);
 }
-// console.log(getIntervalMethodArray(-2, 2))
+// console.log(getIntervalMethodArray2(-2, 2))
 
 /** 2
  * Returns a new array where each element is the sum of the corresponding elements
@@ -43,7 +43,7 @@ function getIntervalArray2(start,end) {
  *    sumArrays([10, 20, 30], [5, 10, 15]) => [15, 30, 45]
  *    sumArrays([-1, 0, 1], [1, 2, 3, 4]) => [0, 2, 4, 4]
  */
-function sumArrays(arr1, arr2) {
+function sumArrays1(arr1, arr2) {
     let result = [];
     let maxLength = Math.max(arr1.length, arr2.length);
     for (let i = 0; i < maxLength; i++) {
@@ -52,15 +52,14 @@ function sumArrays(arr1, arr2) {
         result.push(num1 + num2);}
     return result;
 }
-// console.log(sumArrays([1, 2, 3], [4, 5, 6]));   
+// console.log(sumArrays1([1, 2, 3], [4, 5, 6]));   
 
 // 2.2
 function sumArrays2(arr1, arr2){
-    let longerArray = arr1.length >= arr2.length ? arr1 : arr2;
-    let shorterArray = arr1.length < arr2.length ? arr1 : arr2;
-    return longerArray.map((value, index) => {
-        let otherValue = shorterArray[index] ?? 0;
-        return value + otherValue;});
+    let maxLength = Math.max(arr1.length, arr2.length);
+  return Array.from({ length: maxLength }, (_, i) => {
+    return (arr1[i] ?? 0) + (arr2[i] ?? 0);
+  });
 }
 // console.log(sumArrays2([1, 2, 3], [4, 5, 6]));  
 
@@ -77,12 +76,12 @@ function sumArrays2(arr1, arr2){
  *    findElement(['Array', 'Number', 'string'], 'Date') => -1
  *    findElement([0, 1, 2, 3, 4, 5], 5) => 5
  */
-function findElement(arr, value) {
+function findElement1(arr, value) {
     for (let i = 0; i < arr.length; i++) {
         if (arr[i] === value) {
             return i; }}
     return -1; }
-// console.log(findElement(['Array', 'Number', 'string'], 'Date'));
+// console.log(findElement1(['Array', 'Number', 'string'], 'Date'));
 
 // 3.2
 function findElement2(arr, value) {
@@ -103,14 +102,14 @@ function findElement2(arr, value) {
  *    findAllOccurrences([ null, undefined, null ], null) => 2
  *    findAllOccurrences([ true, 0, 1, 'true' ], true) => 1
  */
-function findAllOccurrences(arr, item) {
+function findAllOccurrences1(arr, item) {
     let count = 0;
     for (let element of arr) {
         if (element === item) {
             count++;}}
     
     return count;}
-// console.log(findAllOccurrences([ 0, 0, 1, 1, 1, 2 ], 1)); 
+// console.log(findAllOccurrences1([ 0, 0, 1, 1, 1, 2 ], 1)); 
 
 // 4.2
 function findAllOccurrences2(arr, item) {
@@ -130,13 +129,13 @@ function findAllOccurrences2(arr, item) {
  *    removeFalsyValues([ 1, 2, 3, 4, 5, 'false' ]) => [ 1, 2, 3, 4, 5, 'false' ]
  *    removeFalsyValues([ false, 0, NaN, '', undefined ]) => [ ]
  */
-function removeFalsyValues(arr) {
+function removeFalsyValues1(arr) {
     let result = [];
     for (let element of arr) {
         if (element) {
             result.push(element);}}
     return result;}
-// console.log(removeFalsyValues([ 0, false, 'cat', NaN, true, '' ])); 
+// console.log(removeFalsyValues1([ 0, false, 'cat', NaN, true, '' ])); 
 
 // 5.2
 function removeFalsyValues2(arr) {
@@ -154,12 +153,12 @@ function removeFalsyValues2(arr) {
  *    getStringsLength([ '', 'a', 'bc', 'def', 'ghij' ]) => [ 0, 1, 2, 3, 4 ]
  *    getStringsLength([ 'angular', 'react', 'ember' ]) => [ 7, 5, 5 ]
  */
-function getStringsLength(arr) {
+function getStringsLength1(arr) {
     let lengths = [];
     for (let str of arr) {
         lengths.push(str.length); }
     return lengths;}
-// console.log(getStringsLength([ '', 'a', 'bc', 'def', 'ghij' ]));
+// console.log(getStringsLength1([ '', 'a', 'bc', 'def', 'ghij' ]));
 
 // 6.2
 function getStringsLength2(arr) {
@@ -181,7 +180,7 @@ function getStringsLength2(arr) {
  *   getAverage([ 1, 10, 100, 1000 ])  => 277,75
  *   getAverage([ 2, 3, 3 ])  => 2,67
  */
-function getAverage(arr) {
+function getAverage1(arr) {
     if (arr.length === 0) 
         return 0;
     let sum = 0;
@@ -189,12 +188,11 @@ function getAverage(arr) {
         sum += num;}
     let average = sum / arr.length;
     return Number(average.toFixed(2));}
-// console.log(getAverage([])); 
+// console.log(getAverage1([])); 
 
 // 7.2
 function getAverage2(arr) {
-    if (arr.length === 0) 
-        return 0;
+    if (arr.length === 0) { return 0;}
     let sum = arr.reduce((acc, num) => acc + num, 0);
     return +(sum / arr.length).toFixed(2);}
 // console.log(getAverage2([])); 
@@ -209,7 +207,7 @@ function getAverage2(arr) {
  *    isSameLength(['orange', 'banana', 'cherry']) => true
  *    isSameLength(['cat', 'dog', 'elephant']) => false
  */
-function isSameLength(arr) {
+function isSameLength1(arr) {
     if (arr.length <= 1) 
         return true;
     let targetLength = arr[0].length;
@@ -217,7 +215,7 @@ function isSameLength(arr) {
         if (arr[i].length !== targetLength) {
             return false;}}
     return true; }
-// console.log(isSameLength(['orange', 'banana', 'cherry']));
+// console.log(isSameLength1(['orange', 'banana', 'cherry']));
 
 // 8.2
 function isSameLength2(arr) {
@@ -237,12 +235,12 @@ function isSameLength2(arr) {
  *    isValueEqualsIndex([2, 1, 0, 4, 5]) => true
  *    isValueEqualsIndex([10, 20, 30, 40, 50]) => false
  */
-function isValueEqualsIndex(arr) {
+function isValueEqualsIndex1(arr) {
     for (let i = 0; i < arr.length; i++) {
         if (arr[i] === i) {
             return true;}}
     return false; }
-// console.log(isValueEqualsIndex([0, 1, 2, 3, 4])); 
+// console.log(isValueEqualsIndex1([0, 1, 2, 3, 4])); 
 
 // 9.2
 function isValueEqualsIndex2(arr) {
@@ -261,7 +259,7 @@ function isValueEqualsIndex2(arr) {
  *    insertItem([ 1, 3, 4, 5 ], 2, 1)  => [ 1, 2, 3, 4, 5 ]
  *    insertItem([ 1, 'b', 'c'], 'x', 0) => [ 'x', 1, 'b', 'c' ]
  */
-function insertItem(arr, item, index) {
+function insertItem1(arr, item, index) {
     let result = [];
     for (let i = 0; i <= arr.length; i++) {
         if (i === index) {
@@ -269,7 +267,7 @@ function insertItem(arr, item, index) {
         if (i < arr.length) {
             result.push(arr[i]);}}
     return result;}
-// console.log(insertItem([1, 3, 4, 5], 2, 1));
+// console.log(insertItem1([1, 3, 4, 5], 2, 1));
 
 // 10.2
 function insertItem2(arr, item, index) {
@@ -289,13 +287,12 @@ function insertItem2(arr, item, index) {
  *    getHead([ 'a', 'b', 'c', 'd'], 3) => [ 'a', 'b', 'c' ]
  *    getHead([ 'a', 'b', 'c', 'd'], 0) => []
  */
-function getHead(arr, n) {
+function getHead1(arr, n) {
     let result = [];
-    let limit = Math.min(n, arr.length);
-    for (let i = 0; i < limit; i++) {
-        result.push(arr[i]);}
-    return result;}
-//console.log(getHead([ 1, 3, 4, 5 ], 2));
+  for (let i = 0; i < n && i < arr.length; i++) {
+    result.push(arr[i]);}
+  return result;}
+//console.log(getHead1([ 1, 3, 4, 5 ], 2));
 
 // 11.2
 function getHead2(arr, n) {
@@ -314,13 +311,13 @@ function getHead2(arr, n) {
  *    getTail([ 'a', 'b', 'c', 'd'], 3) => [ 'b', 'c', 'd' ]
  *    getTail([ 'a', 'b', 'c', 'd'], 0) => []
  */
-function getTail(arr, n) {
+function getTail1(arr, n) {
     let result = [];
     let start = Math.max(0, arr.length - n);
     for (let i = start; i < arr.length; i++) {
         result.push(arr[i]);}
     return result;}
-//console.log(getTail([ 1, 3, 4, 5 ], 2)); 
+//console.log(getTail1([ 1, 3, 4, 5 ], 2)); 
 
 // 12.2
 function getTail2(arr, n) {
@@ -340,18 +337,18 @@ function getTail2(arr, n) {
  *    doubleArray([0, 1, 2, 3, 4, 5]) => [0, 1, 2, 3, 4, 5, 0, 1, 2, 3, 4, 5]
  *    doubleArray([]) => []
  */
-function doubleArray(arr) {
+function doubleArray1(arr) {
     let result = [];
+  for (let step = 0; step < 2; step++) {
     for (let i = 0; i < arr.length; i++) {
-        result.push(arr[i]);}
-    for (let i = 0; i < arr.length; i++) {
-        result.push(arr[i]);}
-    return result;}
-//console.log(doubleArray(['Ace', 10, true])); 
+      result.push(arr[i]);}}
+  return result;}
+//console.log(doubleArray1(['Ace', 10, true])); 
 
 // 13.2
 function doubleArray2(arr) {
-    return arr.concat(arr);}
+    //return arr.concat(arr);
+    return [...arr, ...arr];}
 //console.log(doubleArray2(['Ace', 10, true])); 
 
 /**14
@@ -365,14 +362,14 @@ function doubleArray2(arr) {
  *    toStringList([1, 2, 3, 4, 5]) => '1,2,3,4,5'
  *    toStringList(['rock', 'paper', 'scissors']) => 'rock,paper,scissors'
  */
-function toStringList(arr) {
+function toStringList1(arr) {
     let result = '';
     for (let i = 0; i < arr.length; i++) {
         result += arr[i];
         if (i < arr.length - 1) {
             result += ',';}}
     return result;}
-//console.log(toStringList([0, false, 'cat', NaN, true, '']));
+//console.log(toStringList1([0, false, 'cat', NaN, true, '']));
 
 // 14.2
 function toStringList2(arr) {
@@ -392,13 +389,13 @@ function toStringList2(arr) {
  *   distinct([ 1, 1, 2, 2, 3, 3, 4, 4]) => [ 1, 2, 3, 4]
  *   distinct([]) => []
  */
-function distinct(arr) {
-    let uniqueArr = [];
-    for (let item of arr) {
-        if (!uniqueArr.includes(item)) {
-            uniqueArr.push(item);}}
-    return uniqueArr;}
-//console.log(distinct([ 1, 2, 3, 3, 2, 1 ])); 
+function distinct1(arr) {
+    let result = [];
+  for (let i = 0; i < arr.length; i++) {
+    if (!result.includes(arr[i])) {
+      result.push(arr[i]);}}
+  return result;}
+//console.log(distinct1([ 1, 2, 3, 3, 2, 1 ])); 
 
 // 15.2
 function distinct2(arr) {
@@ -418,22 +415,21 @@ function distinct2(arr) {
  *    createNDimensionalArray(4, 2) => [[[[0, 0], [0, 0]], [[0, 0], [0, 0]]], [[[0, 0], [0, 0]], [[0, 0], [0, 0]]]]
  *    createNDimensionalArray(1, 1) => [0]
  */
-function createNDimensionalArray(n, size) {
+function createNDimensionalArray1(n, size) {
     let arr = [];
     if (n === 1) {
         for (let i = 0; i < size; i++) {
             arr.push(0);}
         return arr;}
     for (let i = 0; i < size; i++) {
-        arr.push(createNDimensionalArray(n - 1, size));}
+        arr.push(createNDimensionalArray1(n - 1, size));}
     return arr;}
-//console.log(JSON.stringify(createNDimensionalArray(2, 3)));
+//console.log(JSON.stringify(createNDimensionalArray1(2, 3)));
 
 // 16.2
 function createNDimensionalArray2(n, size) {
     if (n === 1) {
         return Array(size).fill(0);}
-
     return Array.from({ length: size }, () => 
         createNDimensionalArray2(n - 1, size));}
 // console.log(JSON.stringify(createNDimensionalArray2(3, 2)));
@@ -449,15 +445,15 @@ function createNDimensionalArray2(n, size) {
  *    flattenArray(['a', ['b', ['c', 'd'], 'e'], 'f']) => ['a', 'b', 'c', 'd', 'e', 'f']
  *    flattenArray([1, 2, 3, 4]) => [1, 2, 3, 4]
  */
-function flattenArray(nestedArray) {
+function flattenArray1(nestedArray) {
     let result = [];
     for (let item of nestedArray) {
         if (Array.isArray(item)) {
-            result.push(...flattenArrayWithLoop(item));
+            result.push(...flattenArray1(item));
         } else {
             result.push(item);}}
     return result;}
-// console.log(flattenArray([1, [2, [3, 4], 5], 6])); 
+// console.log(flattenArray1([1, [2, [3, 4], 5], 6])); 
 
 // 17.2
 function flattenArray2(nestedArray) {
@@ -477,13 +473,13 @@ function flattenArray2(nestedArray) {
  *   selectMany([[1, 2], [3, 4], [5, 6]], (x) => x) =>   [ 1, 2, 3, 4, 5, 6 ]
  *   selectMany(['one','two','three'], (x) => x.split('')) =>   ['o','n','e','t','w','o','t','h','r','e','e']
  */
-function selectMany(arr, childrenSelector) {
+function selectMany1(arr, childrenSelector) {
     let result = [];
     for (let  item of arr) {
         let children = childrenSelector(item);
         result.push(...children);}
     return result;}
-// console.log(selectMany([[1, 2], [3, 4], [5, 6]], (x) => x)); 
+// console.log(selectMany1([[1, 2], [3, 4], [5, 6]], (x) => x)); 
 
 // 18.2
 function selectMany2(arr, childrenSelector) {
@@ -503,13 +499,13 @@ function selectMany2(arr, childrenSelector) {
  *   calculateBalance([ [ 10, 8 ], [ 1, 5 ] ])  => (10 - 8) + (1 - 5) = 2 + -4 = -2
  *   calculateBalance([]) => 0
  */
-function calculateBalance(arr) {
+function calculateBalance1(arr) {
     let balance = 0;
     for (let month of arr) {
         let [income, expense] = month; 
         balance += (income - expense);}
     return balance;}
-// console.log(calculateBalance([[10, 8], [5, 1]]));
+// console.log(calculateBalance1([[10, 8], [5, 1]]));
 
 // 19.2
 function calculateBalance2(arr) {
@@ -528,13 +524,13 @@ function calculateBalance2(arr) {
  *    createChunks(['a', 'b', 'c', 'd', 'e'], 2) => [['a', 'b'], ['c', 'd'], ['e']]
  *    createChunks([10, 20, 30, 40, 50], 1) => [[10], [20], [30], [40], [50]]
  */
-function createChunks(arr, chunkSize) {
+function createChunks1(arr, chunkSize) {
     let chunks = [];
     for (let i = 0; i < arr.length; i += chunkSize) {
         let chunk = arr.slice(i, i + chunkSize);
         chunks.push(chunk);}
     return chunks;}
-// console.log(createChunks([1, 2, 3, 4, 5, 6, 7], 3)); 
+// console.log(createChunks1([1, 2, 3, 4, 5, 6, 7], 3)); 
 
 // 20.2
 function createChunks2(arr, chunkSize) {
@@ -556,12 +552,12 @@ function createChunks2(arr, chunkSize) {
  *    generateOdds(2) => [ 1, 3 ]
  *    generateOdds(5) => [ 1, 3, 5, 7, 9 ]
  */
-function generateOdds(len) {
+function generateOdds1(len) {
     let result = [];
     for (let i = 0; i < len; i++) {
         result.push(1 + i * 2);} 
     return result;}
-//console.log(generateOdds(0));
+//console.log(generateOdds1(0));
 
 // 21.2
 function generateOdds2(len) {
@@ -580,12 +576,12 @@ function generateOdds2(len) {
  *   getElementByIndices(['one','two','three'], [2]) => 'three'  (arr[2])
  *   getElementByIndices([[[ 1, 2, 3]]], [ 0, 0, 1 ]) => 2        (arr[0][0][1])
  */
-function getElementByIndices(arr, indices) {
+function getElementByIndices1(arr, indices) {
     let current = arr;
     for (let index of indices) {
         current = current[index];}
     return current;}
-//console.log(getElementByIndices([[1, 2], [3, 4], [5, 6]], [0, 0]));
+//console.log(getElementByIndices1([[1, 2], [3, 4], [5, 6]], [0, 0]));
 
 // 22.2
 function getElementByIndices2(arr, indices) {
@@ -604,13 +600,13 @@ function getElementByIndices2(arr, indices) {
  *  getFalsyValuesCount([ -1, 'false', null, 0 ]) => 2
  *  getFalsyValuesCount([ null, undefined, NaN, false, 0, '' ]) => 6
  */
-function getFalsyValuesCount(arr) {
+function getFalsyValuesCount1(arr) {
     let count = 0;
     for (let element of arr) {
         if (!element) {
             count++;}}
     return count;}
-// console.log(getFalsyValuesCount([])); 
+// console.log(getFalsyValuesCount1([])); 
 
 // 23.2
 function getFalsyValuesCount2(arr) {
@@ -635,7 +631,7 @@ function getFalsyValuesCount2(arr) {
  *                              [0,0,0,1,0],
  *                              [0,0,0,0,1]]
  */
-function getIdentityMatrix(n) {
+function getIdentityMatrix1(n) {
     let matrix = [];
     for (let i = 0; i < n; i++) {
         let row = [];
@@ -646,7 +642,7 @@ function getIdentityMatrix(n) {
                 row.push(0);}}
         matrix.push(row);}
     return matrix;}
-// console.log(getIdentityMatrix(1)); 
+// console.log(getIdentityMatrix1(1)); 
 
 // 24.2
 function getIdentityMatrix2(n) {
@@ -666,13 +662,13 @@ function getIdentityMatrix2(n) {
  *    getIndicesOfOddNumbers([2, 4, 6, 8, 10]) => []
  *    getIndicesOfOddNumbers([11, 22, 33, 44, 55]) => [0, 2, 4]
  */
-function getIndicesOfOddNumbers(numbers) {
+function getIndicesOfOddNumbers1(numbers) {
     let indices = [];
     for (let i = 0; i < numbers.length; i++) {
         if (numbers[i] % 2 !== 0) {
             indices.push(i);}}
     return indices;}
-// console.log(getIndicesOfOddNumbers([1, 2, 3, 4, 5]));
+// console.log(getIndicesOfOddNumbers1([1, 2, 3, 4, 5]));
 
 // 25.2
 function getIndicesOfOddNumbers2(numbers) {
@@ -692,13 +688,13 @@ function getIndicesOfOddNumbers2(numbers) {
  *    getHexRGBValues([ 0, 255, 16777215]) => [ '#000000', '#0000FF', '#FFFFFF' ]
  *    getHexRGBValues([]) => []
  */
-function getHexRGBValues(arr) {
+function getHexRGBValues1(arr) {
     let result = [];
     for (let num of arr) {
         let hex = num.toString(16).padStart(6, '0').toUpperCase();
         result.push(`#${hex}`);}
     return result;}
-// console.log(getHexRGBValues([0, 255, 16777215])); 
+// console.log(getHexRGBValues1([0, 255, 16777215])); 
 
 // 26.2
 function getHexRGBValues2(arr) {
@@ -721,7 +717,7 @@ function getHexRGBValues2(arr) {
  *   getMaxItems([ 10, 2, 7, 5, 3, -5 ], 3) => [ 10, 7, 5 ]
  *   getMaxItems([ 10, 10, 10, 10 ], 3) => [ 10, 10, 10 ]
  */
-function getMaxItems(arr, n) {
+function getMaxItems1(arr, n) {
     if (arr.length === 0) 
         return [];
     let sorted = [...arr];
@@ -737,7 +733,7 @@ function getMaxItems(arr, n) {
     for (let i = 0; i < limit; i++) {
         result.push(sorted[i]);}
     return result;}
-// console.log(getMaxItems([10, 2, 7, 5, 3, -5], 3));
+// console.log(getMaxItems1([10, 2, 7, 5, 3, -5], 3));
 
 // 27.2
 function getMaxItems2(arr, n) {
@@ -756,13 +752,13 @@ function getMaxItems2(arr, n) {
  *    findCommonElements(['a', 'b', 'c'], ['b', 'c', 'd']) => [ 'b', 'c' ]
  *    findCommonElements([1, 2, 3], ['a', 'b', 'c']) => []
  */
-function findCommonElements(arr1, arr2) {
+function findCommonElements1(arr1, arr2) {
     let common = [];
     for (let item of arr1) {
         if (arr2.includes(item) && !common.includes(item)) {
             common.push(item);}}
     return common;}
-// console.log(findCommonElements([1, 2, 3], [2, 3, 4]));
+// console.log(findCommonElements1([1, 2, 3], [2, 3, 4]));
 
 // 28.2
 function findCommonElements2(arr1, arr2) {
@@ -782,7 +778,7 @@ function findCommonElements2(arr1, arr2) {
  *    findLongestIncreasingSubsequence([3, 10, 2, 1, 20]) => longest is [3, 10] and [1, 20] => 2
  *    findLongestIncreasingSubsequence([50, 3, 10, 7, 40, 80]) => longest is [7, 40, 80] => 3
  */
-function findLongestIncreasingSubsequence(nums) {
+function findLongestIncreasingSubsequence1(nums) {
     if (nums.length === 0) 
         return 0;
     let maxLen = 1;
@@ -795,7 +791,7 @@ function findLongestIncreasingSubsequence(nums) {
         if (currentLen > maxLen) {
             maxLen = currentLen;}}
     return maxLen;}
-// console.log(findLongestIncreasingSubsequence([10, 22, 9, 33, 21, 50, 41, 60, 80]));
+// console.log(findLongestIncreasingSubsequence1([10, 22, 9, 33, 21, 50, 41, 60, 80]));
 
 // 29.2
 function findLongestIncreasingSubsequence2(nums) {
@@ -829,14 +825,14 @@ function findLongestIncreasingSubsequence2(nums) {
  *  propagateItemsByPositionIndex([ 'a', 'b', 'c', null ]) => [ 'a', 'b', 'b', 'c', 'c', 'c',  null, null, null, null ]
  *  propagateItemsByPositionIndex([ 1,2,3,4,5 ]) => [ 1, 2, 2, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5, 5, 5 ]
  */
-function propagateItemsByPositionIndex(arr) {
+function propagateItemsByPositionIndex1(arr) {
     let result = [];
     for (let i = 0; i < arr.length; i++) {
         let count = i + 1;
         for (let j = 0; j < count; j++) {
             result.push(arr[i]);}}
     return result;}
-// console.log(propagateItemsByPositionIndex(['a', 'b'])); 
+// console.log(propagateItemsByPositionIndex1(['a', 'b'])); 
 
 // 30.2
 function propagateItemsByPositionIndex2(arr) {
@@ -857,7 +853,7 @@ function propagateItemsByPositionIndex2(arr) {
  *    shiftArray(['a', 'b', 'c', 'd'], -1) => ['b', 'c', 'd', 'a']
  *    shiftArray([10, 20, 30, 40, 50], -3) => [40, 50, 10, 20, 30]
  */
-function shiftArray(arr, n) {
+function shiftArray1(arr, n) {
     if (arr.length === 0) return arr;
   let result = [...arr]; 
   let length = result.length;
@@ -869,9 +865,9 @@ function shiftArray(arr, n) {
   } else if (count < 0) {
     count = Math.abs(count);
     for (let i = 0; i < count; i++) {
-      const firstElement = result.shift();
+      let firstElement = result.shift();
       result.push(firstElement);}}}
-// console.log(shiftArray([1, 2, 3, 4, 5], 2));
+// console.log(shiftArray1([1, 2, 3, 4, 5], 2));
 
 // 31.2
 function shiftArray2(arr, n) {
@@ -896,7 +892,7 @@ function shiftArray2(arr, n) {
  *   sortDigitNamesByNumericOrder([ 'nine','eight','nine','eight' ]) => [ 'eight','eight','nine','nine']
  *   sortDigitNamesByNumericOrder([ 'one','one','one','zero' ]) => [ 'zero','one','one','one' ]
  */
-function sortDigitNamesByNumericOrder(arr) {
+function sortDigitNamesByNumericOrder1(arr) {
     if (arr.length === 0) return [];
     const digitOrder = [
         'zero', 'one', 'two', 'three', 'four', 
@@ -911,7 +907,7 @@ function sortDigitNamesByNumericOrder(arr) {
                 sorted[j] = sorted[j + 1];
                 sorted[j + 1] = temp;}}}
     return sorted;}
-// console.log(sortDigitNamesByNumericOrder([ 'nine', 'one' ])); 
+// console.log(sortDigitNamesByNumericOrder1([ 'nine', 'one' ])); 
 
 // 32.2
 function sortDigitNamesByNumericOrder2(arr) {
@@ -940,7 +936,7 @@ function sortDigitNamesByNumericOrder2(arr) {
  *   swapHeadAndTail([]) => []
  *
  */
-function swapHeadAndTail(arr) {
+function swapHeadAndTail1(arr) {
     if (arr.length <= 1) return [...arr];
     let result = [];
     let len = arr.length;
@@ -953,7 +949,7 @@ function swapHeadAndTail(arr) {
     for (let i = 0; i < halfLen; i++) {
         result.push(arr[i]);}
     return result;}
-// console.log(swapHeadAndTail([1, 2, 3, 4, 5]));
+// console.log(swapHeadAndTail1([1, 2, 3, 4, 5]));
 
 // 33.2
 function swapHeadAndTail2(arr) {
